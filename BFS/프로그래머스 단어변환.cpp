@@ -40,8 +40,7 @@ int solution(string begin, string target, vector<string> words) {
             answer = dist[cur];
             break;
         }
-
-        // bfs Á¶°Ç
+        
         for (int i = 0; i < words.size(); i++) {
             if (dist[words[i]] != -1) continue;
             if (!compare(cur, words[i])) continue;
