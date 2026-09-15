@@ -1,3 +1,4 @@
+// 9:57
 #include <string>
 #include <vector>
 #include <queue>
@@ -24,6 +25,8 @@ int bfs(vector<string>& room) {
                 int curr = q.front().first, curc = q.front().second;
                 q.pop();
 
+                if (dist[curr][curc] >= 2) break;
+
                 for (int d = 0; d < 4; d++) {
                     int nr = curr + dr[d];
                     int nc = curc + dc[d];
@@ -33,21 +36,10 @@ int bfs(vector<string>& room) {
                     if (dist[nr][nc] != -1) continue;
 
                     dist[nr][nc] = dist[curr][curc] + 1;
+                    q.push({ nr,nc });
 
-                    if (room[nr][nc] == 'P') {
-                        if (dist[nr][nc] == 2) {
-                            if (room[curr][curc] == 'O' || room[curr][curc] == 'P') return 0;
-                            continue;
-                        }
+                    if (room[nr][nc] == 'P') return 0;
 
-
-
-                        if (dist[nr][nc] == 1) {
-                            if (room[curr][curc] == 'P') return 0;
-                        }
-                    }
-
-                    if (dist[nr][nc] < 2) q.push({ nr,nc });
                 }
             }
 
